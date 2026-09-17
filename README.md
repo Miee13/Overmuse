@@ -1,6 +1,6 @@
 # Overmuse
 
-Overlay musik interaktif untuk **TikTok Live Studio** & **OBS**. Menampilkan lagu yang sedang diputar (Spotify / Browser / Windows Media), lirik sinkron otomatis, dan fitur request lagu langsung dari chat komentar TikTok LIVE.
+Overlay musik interaktif yang berjalan secara lokal untuk **TikTok Live Studio** & **OBS**. Menampilkan lagu yang sedang diputar (Spotify / Browser / Windows Media), lirik sinkron otomatis, dan fitur request lagu langsung dari chat komentar TikTok LIVE.
 
 ---
 

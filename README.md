@@ -27,17 +27,13 @@ PORT=3000
 
 ### 3. Jalankan Aplikasi
 
-**Rekomendasi:**
+**Rekomendasi untuk Titok Studio:**
 ```bash
 npm run tunnel
 ```
 Salin link HTTPS yang muncul (contoh: `https://xxxx.trycloudflare.com`) lalu masukkan sebagai **Browser Source** di TikTok Live Studio.
 
-<<<<<<< HEAD
 **Untuk berjalan di Lokal:**
-=======
-**Untuk Lokal:**
->>>>>>> 5361719c819941cc56fa054de3e1222982dc5356
 ```bash
 npm start
 ```

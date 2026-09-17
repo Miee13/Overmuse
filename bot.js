@@ -1,10 +1,13 @@
+require('dotenv').config();
+
 const tiktokConnector = require('tiktok-live-connector');
 const TikTokLiveConnection = tiktokConnector.TikTokLiveConnection || tiktokConnector.WebcastPushConnection;
 
 // ========================================================
 // CONFIGURATION USERNAME TIKTOK
 // ========================================================
-const TIKTOK_USERNAME = 'orgamii';         // Ganti dengan Username TikTok Anda (saat sedang LIVE)
+// Diambil dari file .env → TIKTOK_USERNAME
+const TIKTOK_USERNAME = process.env.TIKTOK_USERNAME || '';
 
 /**
  * Parser command case-insensitive untuk !request, !play, !sr, dan !skip
@@ -29,8 +32,8 @@ function parseCommand(message) {
 }
 
 function initBot(handlers = {}) {
-    const addRequest = handlers.addRequest || (() => {});
-    const skipSong = handlers.skipSong || (() => {});
+    const addRequest = handlers.addRequest || (() => { });
+    const skipSong = handlers.skipSong || (() => { });
 
     // ----------------------------------------------------
     // Inisialisasi Bot TikTok Live Chat (Dengan Auto-Reconnect)

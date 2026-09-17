@@ -402,7 +402,7 @@ app.get('/skip', (req, res) => {
     res.send(`Lagu di-skip oleh ${user}`);
 });
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
     console.log(`Server Overlay Overmuse berjalan di http://localhost:${PORT}`);
 });

@@ -16,12 +16,14 @@ https://github.com/pear-devs/pear-desktop.git
 npm install
 ```
 
-### 2. Atur Username TikTok
-Buka `bot.js` dan ganti username TikTok Anda (tanpa tanda `@`):
-```javascript
-const TIKTOK_USERNAME = 'username_tiktok_anda';
+### 2. Buat File `.env`
+Buat file `.env` di root project (sejajar dengan `package.json`):
+```env
+TIKTOK_USERNAME=username_tiktok_anda
+PORT=3000
 ```
-> *Catatan: Bot TikTok hanya bisa terhubung saat akun Anda **sedang LIVE**.*
+> *Ganti `username_tiktok_anda` dengan username TikTok Anda (tanpa tanda `@`).*
+> *Bot TikTok hanya bisa terhubung saat akun Anda **sedang LIVE**.*
 
 ### 3. Jalankan Aplikasi
 
@@ -31,11 +33,11 @@ npm run tunnel
 ```
 Salin link HTTPS yang muncul (contoh: `https://xxxx.trycloudflare.com`) lalu masukkan sebagai **Browser Source** di TikTok Live Studio.
 
-**Untuk OBS Studio (PC Lokal):**
+**Untuk berjalan di Lokal:**
 ```bash
 npm start
 ```
-Tambahkan **Browser Source** dengan URL: `http://localhost:3000`.
+Tambahkan **Browser Source** dengan URL: `http://localhost:3000` (atau sesuai `PORT` di `.env`).
 
 ---
 

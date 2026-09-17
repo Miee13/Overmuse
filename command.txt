@@ -1,7 +1,0 @@
-!play / !req
-
-!skip
-
-node tunnel.js
-
-Stop-Process -Name node -Force

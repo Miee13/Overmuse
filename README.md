@@ -1,10 +1,10 @@
 # Overmuse
 
-Overlay musik interaktif yang berjalan secara lokal menggunakan Pear-Desktop untuk **TikTok Live Studio** & **OBS**. Menampilkan lagu yang sedang diputar (Browser / Windows Media), lirik sinkron otomatis, dan fitur request lagu langsung dari chat komentar TikTok LIVE. Juga dapat mengontrol saat lagu request sedang berjalan lalu akan membuat lagu pada Pear-Desktop menjadi pause, dan berjalan kembali setelah lagu request telah habis
+Overlay musik interaktif yang berjalan secara lokal menggunakan YTMusic (Pear-Desktop) untuk **TikTok Live Studio** & **OBS**. Menampilkan lagu yang sedang diputar (Browser / Windows Media), lirik sinkron otomatis, dan fitur request lagu langsung dari chat komentar TikTok LIVE. Juga dapat mengontrol saat lagu request sedang berjalan lalu akan membuat lagu pada Pear-Desktop menjadi pause, dan berjalan kembali setelah lagu request telah habis
 
 ---
 
-### Pear-Desktop Download link
+### YTMusic (Pear-Desktop) Download link
 https://github.com/pear-devs/pear-desktop.git
 
 ---
@@ -27,13 +27,17 @@ PORT=3000
 
 ### 3. Jalankan Aplikasi
 
-**Untuk TikTok Live Studio (Rekomendasi):**
+**Rekomendasi:**
 ```bash
 npm run tunnel
 ```
 Salin link HTTPS yang muncul (contoh: `https://xxxx.trycloudflare.com`) lalu masukkan sebagai **Browser Source** di TikTok Live Studio.
 
+<<<<<<< HEAD
 **Untuk berjalan di Lokal:**
+=======
+**Untuk Lokal:**
+>>>>>>> 5361719c819941cc56fa054de3e1222982dc5356
 ```bash
 npm start
 ```

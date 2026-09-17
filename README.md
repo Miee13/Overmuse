@@ -25,13 +25,13 @@ const TIKTOK_USERNAME = 'username_tiktok_anda';
 
 ### 3. Jalankan Aplikasi
 
-**Untuk TikTok Live Studio (Rekomendasi):**
+**Rekomendasi:**
 ```bash
 npm run tunnel
 ```
 Salin link HTTPS yang muncul (contoh: `https://xxxx.trycloudflare.com`) lalu masukkan sebagai **Browser Source** di TikTok Live Studio.
 
-**Untuk OBS Studio (PC Lokal):**
+**Untuk Lokal:**
 ```bash
 npm start
 ```

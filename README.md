@@ -50,19 +50,16 @@ PEAR_PORT=26538
 
 ### 3. Jalankan Aplikasi
 
-**Mode Lokal (Untuk OBS / TikTok Live Studio di PC yang sama):**
-```bash
-npm start
-```
-Tambahkan **Browser Source** di OBS / TikTok Live Studio dengan URL:
-```
-http://localhost:3000
-```
-- Rekomendasi Resolusi Browser Source: `550 x 300` atau `600 x 350` (Custom/Transparent).
-
-**Mode Cloudflare Tunnel (Opsional jika ingin URL HTTPS publik/untuk yang tidak bisa menggunakan localhost):**
+**Rekomendasi untuk Titok Studio:**
 ```bash
 npm run tunnel
+```
+Salin link HTTPS yang muncul (contoh: `https://xxxx.trycloudflare.com`) lalu masukkan sebagai **Browser Source** di TikTok Live Studio.
+
+
+**Untuk berjalan di Lokal:**
+```
+http://localhost:3000
 ```
 
 ---

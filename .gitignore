@@ -28,3 +28,9 @@ Thumbs.db
 temp/
 tmp/
 scratch/
+test-*.js
+
+# Cloudflare Tunnel / Untun Binaries & Cache
+cloudflared.exe
+.cloudflared/
+untun/

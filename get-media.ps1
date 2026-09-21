@@ -20,6 +20,8 @@ $sessions = $sessionManager.GetSessions()
 
 $results = @()
 foreach ($session in $sessions) {
+    # Prioritaskan hanya sesi Pear Desktop / YouTube Music jika ada
+    $appId = $session.SourceAppUserModelId
     $playback = $session.GetPlaybackInfo()
     $timeline = $session.GetTimelineProperties()
     
@@ -34,7 +36,7 @@ foreach ($session in $sessions) {
     if ($pos -lt 0) { $pos = 0 }
 
     $item = @{
-        appId = $session.SourceAppUserModelId
+        appId = $appId
         status = $statusStr
         position = [math]::Round($pos, 2)
         duration = [math]::Round($duration, 2)
@@ -42,6 +44,7 @@ foreach ($session in $sessions) {
         artist = ""
     }
     
+    # Hanya query media props jika diperlukan
     try {
         [Windows.Media.Control.GlobalSystemMediaTransportControlsSessionMediaProperties,Windows.Media,ContentType=WindowsRuntime] | Out-Null
         $mediaPropsTask = $session.TryGetMediaPropertiesAsync()

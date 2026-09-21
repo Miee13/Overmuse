@@ -1,11 +1,28 @@
-# Overmuse
+# Overmuse 🎵
 
-Overlay musik interaktif yang berjalan secara lokal menggunakan YTMusic (Pear-Desktop) untuk **TikTok Live Studio** & **OBS**. Menampilkan lagu yang sedang diputar (Browser / Windows Media), lirik sinkron otomatis, dan fitur request lagu langsung dari chat komentar TikTok LIVE. Juga dapat mengontrol saat lagu request sedang berjalan lalu akan membuat lagu pada Pear-Desktop menjadi pause, dan berjalan kembali setelah lagu request telah habis
+Overlay musik interaktif premium untuk **TikTok Live Studio** & **OBS**. Terintegrasi langsung secara lokal dengan YouTube Music Desktop (**Pear Desktop**) untuk menampilkan lagu yang sedang diputar, lirik tersinkronisasi (*synced lyrics*), serta sistem antrean request lagu otomatis dari penonton TikTok Live.
 
 ---
 
-### YTMusic (Pear-Desktop) Download link
-https://github.com/pear-devs/pear-desktop.git
+## ✨ Fitur Unggulan
+
+- **Native Pear Desktop API Integration**: Mengendalikan pemutar langsung melalui API lokal bawaan Pear Desktop tanpa pop-up browser atau gangguan audio.
+- **Smart Queue Interleaving**: Lagu request penonton otomatis ke antrean berikutnya (`Up Next`).
+- **Live Synced Lyrics**: Mendukung lirik tersinkronisasi (LRC) real-time dari LRCLIB dengan auto-scroll.
+- **TikTok Live Auto-Connect**: Bot otomatis mendeteksi ketika akun Anda mulai Live dan menyambungkan interaksi chat penonton.
+
+---
+
+## 📋 Persyaratan Sistem
+
+1. **Node.js** v18+ atau v20+ terinstall.
+2. **Pear Desktop** (YouTube Music Desktop Client)
+   - Download: [Pear Desktop Repository](https://github.com/pear-devs/pear-desktop)
+3. **Konfigurasi Plugin di Pear Desktop (Penting!)**:
+   - Buka menu atas di Pear Desktop: **Plugins** > **API Server [Beta]**
+   - Centang **Enabled**
+   - Atur **Authorization strategy** ke **`None`**
+   - Pastikan Port default adalah `26538` (atau sesuaikan di `.env`)
 
 ---
 
@@ -16,47 +33,81 @@ https://github.com/pear-devs/pear-desktop.git
 npm install
 ```
 
-### 2. Buat File `.env`
-Buat file `.env` di root project (sejajar dengan `package.json`):
+### 2. Konfigurasi File `.env`
+Sesuaikan file `.env` di root project:
 ```env
+# Username TikTok akun Anda (tanpa tanda @)
 TIKTOK_USERNAME=username_tiktok_anda
+
+# Port server web overlay
 PORT=3000
+
+# Konfigurasi API Pear Desktop
+PEAR_HOST=127.0.0.1
+PEAR_PORT=26538
 ```
-> *Ganti `username_tiktok_anda` dengan username TikTok Anda (tanpa tanda `@`).*
-> *Bot TikTok hanya bisa terhubung saat akun Anda **sedang LIVE**.*
+> *Catatan: Bot TikTok akan otomatis melakukan polling koneksi dan langsung terhubung begitu akun Anda **LIVE** di TikTok.*
 
 ### 3. Jalankan Aplikasi
 
-**Rekomendasi:**
-```bash
-npm run tunnel
-```
-Salin link HTTPS yang muncul (contoh: `https://xxxx.trycloudflare.com`) lalu masukkan sebagai **Browser Source** di TikTok Live Studio.
-
-<<<<<<< HEAD
-**Untuk berjalan di Lokal:**
-=======
-**Untuk Lokal:**
->>>>>>> 5361719c819941cc56fa054de3e1222982dc5356
+**Mode Lokal (Untuk OBS / TikTok Live Studio di PC yang sama):**
 ```bash
 npm start
 ```
-Tambahkan **Browser Source** dengan URL: `http://localhost:3000` (atau sesuai `PORT` di `.env`).
+Tambahkan **Browser Source** di OBS / TikTok Live Studio dengan URL:
+```
+http://localhost:3000
+```
+- Rekomendasi Resolusi Browser Source: `550 x 300` atau `600 x 350` (Custom/Transparent).
+
+**Mode Cloudflare Tunnel (Opsional jika ingin URL HTTPS publik/untuk yang tidak bisa menggunakan localhost):**
+```bash
+npm run tunnel
+```
 
 ---
 
-## 💬 Command Chat Penonton
+## 💬 Command Chat Penonton di TikTok Live
 
-| Command | Keterangan |
-| :--- | :--- |
-| `!request <judul lagu>` / `!play <judul lagu>` | Menambahkan lagu ke antrean request |
-| `!skip` | Melewati lagu yang sedang diputar |
+| Command | Contoh | Deskripsi |
+| :--- | :--- | :--- |
+| `!request <judul / link>` | `!request Bohemian Rhapsody` | Menyelipkan lagu ke antrean Pear Desktop |
+| `!sr <judul>` | `!sr Coldplay Yellow` | Shortcut untuk request lagu |
+| `!play <judul>` | `!play YOASOBI Idol` | Shortcut untuk request lagu |
+| `!skip` | `!skip` | Melewati (skip) lagu ke antrean berikutnya |
 
 ---
 
-## 🛑 Stop Server
-Untuk menghentikan background process:
+## 🛠️ Testing Manual Tanpa Live Chat
+
+Anda bisa menguji sistem langsung lewat browser atau terminal:
+- **Request Lagu:** `http://localhost:3000/request?song=NamaLagu&user=NamaPenonton`
+- **Skip Lagu:** `http://localhost:3000/skip`
+- **Pause Player:** `http://localhost:3000/pause`
+- **Resume Player:** `http://localhost:3000/play`
+
+---
+
+## 📁 Struktur File Proyek
+
+```
+Overmuse/
+├── .env                  # Variabel environment (Username, Port, API Pear)
+├── bot.js                # Bot konektor TikTok Live chat command parser
+├── pearClient.js         # REST Client penghubung ke API Server Pear Desktop
+├── lyrics.js             # Engine pencari lirik (LRCLIB) & konverter Romaji
+├── yt-search.js          # Pencari metadata & Video ID YouTube Music
+├── server.js             # Express & Socket.IO server (Hybrid Player Engine)
+├── get-media.ps1         # Windows Media timeline tracker untuk detik presisi
+├── public/
+│   └── index.html        # UI Overlay animasi, progress bar, & lirik
+└── package.json          # Dependensi & skrip npm
+```
+
+---
+
+## 🛑 Menghentikan Server
+Tekan `Ctrl + C` pada terminal tempat server berjalan, atau jalankan:
 ```bash
 npm run stop
 ```
-atau tekan `Ctrl + C` pada terminal.
